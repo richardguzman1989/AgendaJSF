@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteQrNegociosSQL" columnCount="2" printOrder="Horizontal" pageWidth="612" pageHeight="792" columnWidth="286" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53b6e1dd-c60c-4dcc-bc51-cfac663cddac">
+	<parameter name="ID_NEG" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT neg.id, neg.nombre as nombre, zon.nombre as zona, per.nombres as dueno 
+FROM negocio neg
+LEFT JOIN zona zon
+ON neg.id_zona = zon.id
+LEFT JOIN persona per
+ON neg.id_persona_dueno = per.id
+ORDER BY zon.id ASC, neg.nombre ASC]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="dueno" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="570" height="40" uuid="5d1fccaf-5d14-474e-a8e5-f7d1b8953d2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGOS QR CLIENTES]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="240" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="50" y="0" width="180" height="180" uuid="5ac55236-c186-41c1-ac86-0dfeae706f77"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(
+new com.google.zxing.qrcode.QRCodeWriter().encode(
+"{\n\"app\": \"anaqueles\",\n\"itemType\": \"negocio\",\n\"itemId\":" + $F{id} + "}",
+com.google.zxing.BarcodeFormat.QR_CODE, 400, 400))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="180" width="260" height="20" uuid="97f1b47a-6d01-40a1-94b0-32040bbb3e1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="200" width="260" height="20" uuid="17a86bee-1492-45d4-af0f-e1f8ac08126f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="220" width="260" height="20" uuid="f6447a50-66b0-4a96-bc25-798f3be3c3b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dueno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

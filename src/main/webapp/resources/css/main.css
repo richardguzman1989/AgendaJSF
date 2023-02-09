@@ -1,0 +1,337 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29/07/2015, 09:18:40 AM
+    Author     : EAlcantaraM
+    hola
+*/
+.ui-growl {
+    margin-top: 3%;
+}
+
+legend {
+    font-size: 14px;
+}
+
+table .ui-widget-content a.btn {
+    padding: 2px 10px !important;
+    line-height: inherit !important;
+}
+
+.ui-datatable tbody td{
+    padding: 3px 2px !important;
+}
+
+
+/* ******************** soluciones primefaces **********************/
+/*tamaño fuente primefaces widget*/
+.ui-widget{
+    font-size: 0.9rem !important;
+}
+/*icono input select*/
+.ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+    margin-left: -4px;
+}
+
+/*titulos cuadro de dialogos modal*/
+.ui-dialog.ui-widget-content .ui-dialog-title{
+    font-size: 16px !important;
+}
+
+/*modal contenido*/
+.ui-dialog.ui-widget-content .ui-dialog-content{
+    font-size: 12px !important; 
+}
+
+/*input text dentro de una modal (dialogo)*/
+.input-group .form-control{
+    z-index: auto !important;
+}
+
+.form-personalizado .form-group {
+    margin-bottom: 1px !important;
+}
+
+.dlpropio dt {
+    width: inherit !important;
+
+}
+
+.dlpropio dd {
+    margin-left: 65px !important;
+}
+
+.cancelado  {
+    background-color: #cccccc;
+}
+
+/*Cambiar estilo a los radios de primefaces*/
+.radio-table tr td  {
+    padding-right: 10px;
+}
+
+.radio-table tr td input[type="radio"] {
+    vertical-align: top;
+}
+
+.radio-table tr td label {
+    padding-left: 4px;
+}
+
+th.ui-state-default {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+}
+
+.ui-corner-top {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+/*option[value="autoCompleteId"]{
+    width: 800px;
+}
+.ui-autocomplete{}*/
+
+.personaTable {   
+    border-collapse:collapse;
+    border:1px solid #000000;
+}
+
+.personaTableHeader {
+    text-align:center;
+    background:none repeat scroll 0 0 #B5B5B5;
+    border-bottom:1px solid #000000;  
+    padding:2px;
+}
+
+.personaTableOddRow {
+    text-align:center;
+    background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.personaTableEvenRow {
+    text-align:center;
+    background:none repeat scroll 0 0 #D3D3D3;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.orange {
+    color: orange;
+}
+
+.centered {
+    text-align: center !important;
+}
+
+.rightAlign {
+    text-align: right !important;
+}
+
+.inside-shadow {
+    -moz-box-shadow: inset 0 0 10px #c5c5c5;
+    -webkit-box-shadow: inset 0 0 10px #c5c5c5;
+}
+
+.form-group.required .control-label:after { 
+    content:" *";
+    color: red;
+    font-size: 14px;
+}
+
+.has-error-border {
+    box-shadow: 0 0 3px 0px red;
+}
+
+#btnIrArriba {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background-color: #3c8dbc;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#btnIrArriba:hover {
+    background-color: #367fa9;
+    -webkit-box-shadow: 0px 0px 10px 0px #9c9c9c;
+    -moz-box-shadow: 0px 0px 10px 0px #9c9c9c;
+    box-shadow: 0px 0px 10px 0px #9c9c9c;
+}
+
+.tableFooterText {
+    font-size: 13px; 
+    font-weight: bold;
+}
+
+.numeroLoteText {
+    color: red; 
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+.contratistaText {
+    color: green; 
+    margin-top: 0px;
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+
+.diasLaborables {
+    color: green; 
+    margin-top: 0px;
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+
+.loginInput {
+    border-radius: 8px !important;
+    text-align: center !important;
+    font-size: 13px !important;
+}
+
+td span.ui-column-title {
+    display: none !important;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.cumpleMeta {
+    background-color: #add4c2;
+}
+
+.noCumpleMeta {
+    background-color: #ffb5ab;
+}
+
+.resaltar {
+    background-color: #fff0a0;
+}
+
+.seleccionado {
+    background-color: #32a660;
+}
+
+.flotaDerecha {
+    float: right;
+}
+
+.flotaIzquierda {
+    float: left;
+}
+
+.ui-paginator {
+    text-align: left !important;
+}
+
+.ui-paginator span {
+    text-align: left !important;
+}
+
+.estiloCommandLink {
+    font-size: 10px !important;
+}
+
+.valorPresupuestoTotal {
+    font-weight: bold;
+    color: gray;
+}
+
+.valorCompensacionTotal {
+    font-weight: bold;
+    color: gray;
+}
+
+.valorRendimientoTotal {
+    font-weight: bold;
+    color: gray;
+}
+
+.compensacion-table-group > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.compensacion-table-group > .row > .col-xs-4 {
+    display: inline-block;
+    float: none;
+}
+
+.imagen-os {
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #2b2b2b;
+    margin-bottom: 10px;
+}
+
+div[id="form_osto713:messages_container"] {
+    margin-top: 90px;
+}
+
+div[id="form_osto110:messages_container"] {
+    margin-top: 90px;
+}
+
+.goldCell {
+    background-color: gold;
+}
+
+/* Toggle Switch */
+.ui-toggleswitch .ui-toggleswitch-slider {
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    border-radius: 30px;
+    background-color: #72707080;
+}
+
+.ui-toggleswitch.ui-toggleswitch-checked .ui-toggleswitch-slider {
+    background-color: #17a2b8;
+}
+
+.ui-toggleswitch .ui-toggleswitch-slider::before {
+    background-color: #ffffff;
+    height: 1.250em;
+    width: 1.250em;
+    left: .25em;
+    bottom: .25em;
+    border-radius: 50%;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.ui-toggleswitch {
+    vertical-align: bottom;
+}
+
+body.login-page {
+    background-image:    url(https://fondosmil.com/fondo/26555.jpg) !important;
+    background-size:     cover !important;                     /* <------ */
+    background-repeat:   no-repeat !important;
+    background-position: center center !important;            /* optional, center the image */
+}
