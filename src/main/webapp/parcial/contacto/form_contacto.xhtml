@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Agenda de Contactos</h1>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <section class="content">
+        <div class="container-fluid">
+            <h:form id="form_contacto">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Manejo de contactos</h3>
+                                <span class="border rounded float-right text-white bg-dark pr-2 pl-2"> <h:outputText id="reloj" value="#{relojBean.fechaHoraActual}"/> </span>
+                                <p:poll interval="5" immediate="true" listener="#{relojBean.obtenerFechaFormateada()}" update="reloj"/>
+                            </div>
+                            <!-- /.card-header -->
+
+                            <div class="card-body">
+                                <fieldset>
+
+                                    <p:growl id="messages" showDetail="true" life="3000"/>
+
+                                    <div class="row">
+
+                                        <div class="form-row col-md-10">
+
+                                            <div class="col-md-6">                                          
+                                                <div class="form-group required">
+                                                    <label class="control-label" for="nombre">Nombre</label>
+                                                    <h:inputText id="nombre" value="#{contactoBean.contacto.nombre}" autocomplete="off"
+                                                                 class="form-control input-sm #{component.findComponent('nombre').valid ? '' : 'is-invalid'}" required="true"
+                                                                 requiredMessage="Debe ingresar el nombre" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group required">
+                                                    <label class="control-label" for="telefono">Teléfono</label>
+                                                    <h:inputText id="telefono" value="#{contactoBean.contacto.telefono}" autocomplete="off"
+                                                                 class="form-control input-sm #{component.findComponent('telefono').valid ? '' : 'is-invalid'}" required="true"
+                                                                 requiredMessage="Debe ingresar el número de Teléfono" />
+                                                </div>                                                       
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group required">
+                                                    <label class="control-label" for="direccion">Dirección</label>
+                                                    <h:inputText id="direccion" value="#{contactoBean.contacto.direccion}" autocomplete="off"
+                                                                 class="form-control input-sm #{component.findComponent('direccion').valid ? '' : 'is-invalid'}" required="true"
+                                                                 requiredMessage="Debe ingresar la dirección" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-2 col-sm-12">
+                                            <p:commandLink id="btnGuardar" class="btn btn-sm btn-block btn-info" 
+                                                           actionListener="#{contactoBean.guardar()}"
+                                                           update="@form">
+                                                <i class="fas fa-save" aria-hidden="true"></i> #{contactoBean.contacto.id eq null ? 'Crear' : 'Actualizar'}
+                                            </p:commandLink>
+                                            <p:commandLink  id="btnCancelar" class="btn btn-sm btn-block btn-default"  
+                                                            immediate="true" resetValues="true" type="reset" update="@form"
+                                                            oncomplete="return false;"
+                                                            actionListener="#{contactoBean.limpiar()}">
+                                                <i class="fas fa-trash"></i> Nuevo 
+                                            </p:commandLink>
+                                        </div>
+
+                                    </div>
+
+                                </fieldset>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header with-border">
+                        <h3 class="card-title">Lista de Contactos</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <p:dataTable id="contactosDataTable" var="contacto"
+                                             value="#{contactoBean.contactos}"
+                                             filteredValue="#{contactoBean.contactosFiltrados}"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="(Contactos: {endRecord} de {totalRecords}, Página: {currentPage} de {totalPages})"
+                                             rowsPerPageTemplate="25,50,100,500"
+                                             paginatorPosition="bottom"
+                                             rowKey="#{contacto.id}" 
+                                             selectionMode="single" 
+                                             rows="25"
+                                             scrollable="true"
+                                             widgetVar="contactosDataTable"
+                                             emptyMessage="No hay contactos para mostrar">
+
+                                    <p:ajax event="rowDblselect" listener="#{contactoBean.onRowSelectContacto}" update="form_contacto"/>                          
+
+                                    <f:facet name="header">
+                                        <p:outputPanel>
+                                            <h:outputText value="Buscar contacto: "/>
+                                            <p:inputText id="globalFilter" autocomplete="off" onkeyup="PF('contactosDataTable').filter()" style="max-width:150px" placeholder="Buscar"/>
+                                        </p:outputPanel>
+                                    </f:facet>	
+
+                                    <p:column headerText="NOMBRE" sortBy="#{contacto.nombre}" filterBy="#{contacto.nombre}" filterMatchMode="contains" filterStyle="display:none" class="centered">
+                                        <h:outputText value="#{contacto.nombre}" />
+                                    </p:column>
+                                    <p:column headerText="TELEFONO" sortBy="#{contacto.telefono}" filterBy="#{contacto.telefono}" filterMatchMode="contains" filterStyle="display:none" class="centered">
+                                        <h:outputText value="#{contacto.telefono}" />
+                                    </p:column>
+                                    <p:column headerText="DIRECCION" sortBy="#{contacto.direccion}" filterBy="#{contacto.direccion}" filterMatchMode="contains" filterStyle="display:none" class="centered">
+                                        <h:outputText value="#{contacto.direccion}" />
+                                    </p:column>
+                                    <p:column headerText="EDITAR"  exportable="false" class="centered">
+                                        <p:commandLink id="cmdEditar"
+                                                       class="btn btn-info btn-sm" 
+                                                       update="@form" 
+                                                       process="@this"
+                                                       action="#{contactoBean.setContacto(contacto)}">
+                                            <i class="fas fa-edit" aria-hidden="true"></i>
+                                        </p:commandLink>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </h:form>
+
+        </div>
+
+    </section>
+
+</ui:composition>
