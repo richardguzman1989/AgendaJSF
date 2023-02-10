@@ -1,13 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
-<html xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<html 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns="http://www.w3.org/1999/xhtml">
 
     <h:head>
 
@@ -134,6 +131,8 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <h3 class="card-title">Manejo de contactos</h3>
+                                                <span class="border rounded float-right text-white bg-dark pr-2 pl-2"> <h:outputText id="reloj" value="#{relojBean.fechaHoraActual}"/> </span>
+                                                <p:poll interval="5" immediate="true" listener="#{relojBean.obtenerFechaFormateada()}" update="reloj"/>
                                             </div>
                                             <!-- /.card-header -->
 
@@ -143,35 +142,36 @@
                                                     <p:growl id="messages" showDetail="true" life="6000"/>
 
                                                     <div class="row">
-                                                        <div class="col-md-5">                                          
 
-                                                            <div class="form-group required">
-                                                                <label for="nombre">Nombre</label>
-                                                                <h:inputText id="nombre" value="#{contactoBean.contacto.nombre}" autocomplete="off"
-                                                                             class="form-control input-sm #{component.findComponent('nombre').valid ? '' : 'is-invalid'}" required="true"
-                                                                             requiredMessage="Debe ingresar el nombre" />
+                                                        <div class="form-row col-md-10">
+
+                                                            <div class="col-md-6">                                          
+                                                                <div class="form-group required">
+                                                                    <label class="control-label" for="nombre">Nombre</label>
+                                                                    <h:inputText id="nombre" value="#{contactoBean.contacto.nombre}" autocomplete="off"
+                                                                                 class="form-control input-sm #{component.findComponent('nombre').valid ? '' : 'is-invalid'}" required="true"
+                                                                                 requiredMessage="Debe ingresar el nombre" />
+                                                                </div>
                                                             </div>
 
-                                                        </div>
-
-                                                        <div class="col-md-5">
-
-                                                            <div class="form-group required">
-                                                                <label for="telefono">Teléfono</label>
-                                                                <h:inputText id="telefono" value="#{contactoBean.contacto.telefono}" autocomplete="off"
-                                                                             class="form-control input-sm #{component.findComponent('telefono').valid ? '' : 'is-invalid'}" required="true"
-                                                                             requiredMessage="Debe ingresar el número de Teléfono" />
-                                                            </div>                                                       
-
-                                                        </div>
-
-                                                        <div class="col-sm-10">
-                                                            <div class="form-group required">
-                                                                <label for="direccion">Dirección</label>
-                                                                <h:inputText id="direccion" value="#{contactoBean.contacto.direccion}" autocomplete="off"
-                                                                             class="form-control input-sm #{component.findComponent('direccion').valid ? '' : 'is-invalid'}" required="true"
-                                                                             requiredMessage="Debe ingresar la dirección" />
+                                                            <div class="col-md-6">
+                                                                <div class="form-group required">
+                                                                    <label class="control-label" for="telefono">Teléfono</label>
+                                                                    <h:inputText id="telefono" value="#{contactoBean.contacto.telefono}" autocomplete="off"
+                                                                                 class="form-control input-sm #{component.findComponent('telefono').valid ? '' : 'is-invalid'}" required="true"
+                                                                                 requiredMessage="Debe ingresar el número de Teléfono" />
+                                                                </div>                                                       
                                                             </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group required">
+                                                                    <label class="control-label" for="direccion">Dirección</label>
+                                                                    <h:inputText id="direccion" value="#{contactoBean.contacto.direccion}" autocomplete="off"
+                                                                                 class="form-control input-sm #{component.findComponent('direccion').valid ? '' : 'is-invalid'}" required="true"
+                                                                                 requiredMessage="Debe ingresar la dirección" />
+                                                                </div>
+                                                            </div>
+
                                                         </div>
 
                                                         <div class="col-md-2 col-sm-12">
@@ -212,7 +212,7 @@
                                                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                              currentPageReportTemplate="(Contactos: {endRecord} de {totalRecords}, Página: {currentPage} de {totalPages})"
                                                              rowsPerPageTemplate="25,50,100,500"
-                                                             paginatorPosition="top"
+                                                             paginatorPosition="bottom"
                                                              rowKey="#{contacto.id}" 
                                                              selectionMode="single" 
                                                              rows="25"
@@ -229,7 +229,7 @@
                                                         </p:outputPanel>
                                                     </f:facet>	
 
-                                                    <p:column headerText="NOMBRES" sortBy="#{contacto.nombre}" filterBy="#{contacto.nombre}" filterMatchMode="contains" filterStyle="display:none" class="centered">
+                                                    <p:column headerText="NOMBRE" sortBy="#{contacto.nombre}" filterBy="#{contacto.nombre}" filterMatchMode="contains" filterStyle="display:none" class="centered">
                                                         <h:outputText value="#{contacto.nombre}" />
                                                     </p:column>
                                                     <p:column headerText="TELEFONO" sortBy="#{contacto.telefono}" filterBy="#{contacto.telefono}" filterMatchMode="contains" filterStyle="display:none" class="centered">
