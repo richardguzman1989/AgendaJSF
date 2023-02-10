@@ -16,23 +16,29 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
 import org.primefaces.event.SelectEvent;
 
 /**
  *
  * @author richard
  */
+
+@Getter
+@Setter
+
 @ViewScoped
 @Named
 public class ContactoBean implements Serializable {
-    
+
     private Contacto contacto;
     private List<Contacto> contactos;
     private List<Contacto> contactosFiltrados;
-    
+
     @EJB
     private ContactoFacade contactoFacade;
-    
+
     @PostConstruct
     public void iniciar() {
         limpiar();
@@ -43,52 +49,35 @@ public class ContactoBean implements Serializable {
             contactos = new ArrayList<>();
         }
     }
-    
+
     public void guardar() {
         try {
-            contactoFacade.create(contacto);
+            if (contacto.getId() == null) {
+                contactoFacade.create(contacto);
+                MessageUtils.sendSuccessfulMessage("message", "¡Contacto " + contacto.getNombre() + " creado exitósamente!");
+            } else {
+                contactoFacade.edit(contacto);
+                MessageUtils.sendSuccessfulMessage("message", "¡Contacto " + contacto.getNombre() + " actualizado exitósamente!");
+            }
             limpiar();
             consultarDatos();
+
         } catch (Exception ex) {
             Logger.getLogger(ContactoBean.class.getName()).log(Level.SEVERE, null, ex);
             MessageUtils.sendErrorMessage("message", "¡Error guardando contacto!");
         }
     }
-    
+
     public void limpiar() {
         this.contacto = new Contacto();
-    }    
-    
+    }
+
     public void consultarDatos() {
         contactos = contactoFacade.findAll();
     }
-    
+
     public void onRowSelectContacto(SelectEvent event) {
         this.contacto = (Contacto) event.getObject();
-    }    
-
-    public Contacto getContacto() {
-        return contacto;
     }
 
-    public void setContacto(Contacto contacto) {
-        this.contacto = contacto;
-    }
-
-    public List<Contacto> getContactos() {
-        return contactos;
-    }
-
-    public void setContactos(List<Contacto> contactos) {
-        this.contactos = contactos;
-    }
-
-    public List<Contacto> getContactosFiltrados() {
-        return contactosFiltrados;
-    }
-
-    public void setContactosFiltrados(List<Contacto> contactosFiltrados) {
-        this.contactosFiltrados = contactosFiltrados;
-    }
-    
 }

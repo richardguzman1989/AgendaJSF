@@ -335,3 +335,7 @@ body.login-page {
     background-repeat:   no-repeat !important;
     background-position: center center !important;            /* optional, center the image */
 }
+
+body {
+    background-color: #ebebeb;
+}
